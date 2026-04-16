@@ -54,9 +54,9 @@ class _PestCardState extends State<_PestCard> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-          border: Border.all(color: AppColors.outlineVariant),
+          boxShadow: AppColors.ambientShadow,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +83,7 @@ class _PestCardState extends State<_PestCard> {
             ),
             if (_expanded) ...[
               const SizedBox(height: AppSpacing.md),
-              const Divider(color: AppColors.outlineVariant),
+              const SizedBox(height: AppSpacing.sm),
               const SizedBox(height: AppSpacing.sm),
               _DetailRow(label: 'Symptoms', value: widget.pest.symptoms, icon: '🔍'),
               const SizedBox(height: AppSpacing.sm),

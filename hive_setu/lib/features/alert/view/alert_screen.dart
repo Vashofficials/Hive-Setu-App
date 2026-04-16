@@ -50,9 +50,11 @@ class _AlertCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-        border: Border.all(color: color.withValues(alpha: 0.3), width: isHigh ? 2 : 1),
+        boxShadow: isHigh 
+            ? [BoxShadow(color: AppColors.error.withValues(alpha: 0.1), blurRadius: 10, spreadRadius: 1)]
+            : AppColors.ambientShadow,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

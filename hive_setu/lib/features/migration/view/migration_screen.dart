@@ -70,9 +70,9 @@ class _InfoCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-          border: Border.all(color: color.withValues(alpha: 0.3)),
+          boxShadow: color == AppColors.primary ? AppColors.amberShadow : AppColors.ambientShadow,
         ),
         child: Row(
           children: [
@@ -101,9 +101,9 @@ class _HistoryTile extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-          border: Border.all(color: AppColors.outlineVariant),
+          boxShadow: AppColors.ambientShadow,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

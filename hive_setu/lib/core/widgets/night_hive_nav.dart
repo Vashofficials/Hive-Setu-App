@@ -124,15 +124,39 @@ class _NavItemState extends State<_NavItem>
         builder: (context, child) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Transform.scale(
-              scale: _scaleAnimation.value,
-              child: Icon(
-                widget.isActive ? widget.item.activeIcon : widget.item.icon,
-                size: AppSpacing.iconMd,
-                color: widget.isActive
-                    ? AppColors.nightHiveItemActive
-                    : AppColors.nightHiveItem,
-              ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                if (widget.isActive)
+                  FadeTransition(
+                    opacity: _dotAnimation,
+                    child: Container(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        color: AppColors.nightHiveItemActive.withValues(alpha: 0.2),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.nightHiveItemActive.withValues(alpha: 0.15),
+                            blurRadius: 12,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                Transform.scale(
+                  scale: _scaleAnimation.value,
+                  child: Icon(
+                    widget.isActive ? widget.item.activeIcon : widget.item.icon,
+                    size: AppSpacing.iconMd,
+                    color: widget.isActive
+                        ? AppColors.nightHiveItemActive
+                        : AppColors.nightHiveItem.withValues(alpha: 0.7),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 3),
             Text(
@@ -140,10 +164,7 @@ class _NavItemState extends State<_NavItem>
               style: AppTextStyles.navLabel.copyWith(
                 color: widget.isActive
                     ? AppColors.nightHiveItemActive
-                    : AppColors.nightHiveItem,
-                fontWeight: widget.isActive
-                    ? FontWeight.w700
-                    : FontWeight.w500,
+                    : AppColors.nightHiveItem.withValues(alpha: 0.7),
               ),
             ),
             const SizedBox(height: 2),

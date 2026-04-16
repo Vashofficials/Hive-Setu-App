@@ -22,13 +22,13 @@ class AppColors {
   static const Color onTertiaryContainer = Color(0xFF261900);
 
   // Neutrals
-  static const Color surface = Color(0xFFFAF9F5);
+  static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceVariant = Color(0xFFF3EDE3);
   static const Color onSurface = Color(0xFF1A1B20);
-  static const Color onSurfaceVariant = Color(0xFF49454F);
+  static const Color onSurfaceVariant = Color(0xFF524438);
   static const Color outline = Color(0xFF8C7E6F);
   static const Color outlineVariant = Color(0xFFE0D5C5);
-  static const Color background = Color(0xFFFAF9F5);
+  static const Color background = Color(0xFFF5F2ED);
   static const Color onBackground = Color(0xFF1A1B20);
 
   // Error
@@ -44,8 +44,8 @@ class AppColors {
   static const Color fpoPurple = Color(0xFF6B21A8);
   static const Color fieldOfficerRed = Color(0xFFD64045);
 
-  // Night Hive Nav (Dark bar)
-  static const Color nightHive = Color(0xFF1A1208);
+  // Night Hive Nav (Pure Black for contrast)
+  static const Color nightHive = Color(0xFF000000);
   static const Color nightHiveItem = Color(0xFFBFA07A);
   static const Color nightHiveItemActive = Color(0xFFF7941D);
 
@@ -59,9 +59,9 @@ class AppColors {
 
   // Gradients
   static const LinearGradient pollenPillGradient = LinearGradient(
-    colors: [Color(0xFFE5821A), Color(0xFFD46B0A)],
+    colors: [Color(0xFF8C4F00), Color(0xFFF7941D)],
     begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    end: Alignment(0.7, 0.7), // roughly 135 degrees
   );
 
   static const LinearGradient amberGradient = LinearGradient(
@@ -81,4 +81,36 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  // Elevation & Depth
+  static final List<BoxShadow> ambientShadow = [
+    BoxShadow(
+      color: const Color(0x00000000).withValues(alpha: 0.04),
+      blurRadius: 2,
+      offset: const Offset(0, 1),
+    ),
+    BoxShadow(
+      color: const Color(0x33A69F94).withValues(alpha: 0.08),
+      blurRadius: 12,
+      offset: const Offset(0, 4),
+    ),
+    BoxShadow(
+      color: const Color(0x33A69F94).withValues(alpha: 0.12),
+      blurRadius: 24,
+      offset: const Offset(0, 12),
+    ),
+  ];
+
+  static final List<BoxShadow> amberShadow = [
+    BoxShadow(
+      color: const Color(0xFF926D1B).withValues(alpha: 0.05),
+      blurRadius: 8,
+      offset: const Offset(0, 4),
+    ),
+    BoxShadow(
+      color: const Color(0xFF926D1B).withValues(alpha: 0.1),
+      blurRadius: 24,
+      offset: const Offset(0, 12),
+    ),
+  ];
 }

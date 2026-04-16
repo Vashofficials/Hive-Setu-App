@@ -96,9 +96,6 @@ class _OtpScreenState extends State<OtpScreen>
                       color: AppColors.surfaceVariant,
                       borderRadius:
                           BorderRadius.circular(AppSpacing.radiusMd),
-                      border: const Border.fromBorderSide(
-                        BorderSide(color: AppColors.outlineVariant),
-                      ),
                     ),
                     child: const Icon(
                       Icons.arrow_back_ios_new_rounded,
@@ -144,9 +141,19 @@ class _OtpScreenState extends State<OtpScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(6, (index) {
-                    return SizedBox(
-                      width: 46,
+                    final isFocused = _focusNodes[index].hasFocus;
+                    final isFilled = _controllers[index].text.isNotEmpty;
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      width: 48,
                       height: 56,
+                      decoration: BoxDecoration(
+                        color: (isFocused || isFilled)
+                            ? AppColors.surface
+                            : AppColors.surfaceVariant,
+                        borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                        boxShadow: isFocused ? AppColors.ambientShadow : null,
+                      ),
                       child: TextFormField(
                         controller: _controllers[index],
                         focusNode: _focusNodes[index],
@@ -157,26 +164,10 @@ class _OtpScreenState extends State<OtpScreen>
                           color: AppColors.onSurface,
                           fontWeight: FontWeight.w700,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           counterText: '',
-                          filled: true,
-                          fillColor: AppColors.surfaceVariant,
+                          border: InputBorder.none,
                           contentPadding: EdgeInsets.zero,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(
-                                AppSpacing.radiusMd),
-                            borderSide: const BorderSide(
-                              color: AppColors.outlineVariant,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(
-                                AppSpacing.radiusMd),
-                            borderSide: const BorderSide(
-                              color: AppColors.primary,
-                              width: 2,
-                            ),
-                          ),
                         ),
                         onChanged: (value) {
                           if (value.isNotEmpty && index < 5) {

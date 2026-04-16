@@ -73,9 +73,9 @@ class _FloraCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-        border: Border.all(color: AppColors.outlineVariant),
+        boxShadow: AppColors.ambientShadow,
       ),
       child: Row(
         children: [

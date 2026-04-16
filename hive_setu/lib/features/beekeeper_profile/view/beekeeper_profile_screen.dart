@@ -33,10 +33,10 @@ class BeekeeperProfileScreen extends StatelessWidget {
                     width: 88, height: 88,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: AppColors.pollenPillGradient,
-                      border: Border.all(color: AppColors.white, width: 4),
+                      color: AppColors.surface,
+                      boxShadow: AppColors.ambientShadow,
                     ),
-                    child: const Center(child: Text('R', style: TextStyle(fontFamily: 'Poppins', fontSize: 36, fontWeight: FontWeight.w800, color: AppColors.white))),
+                    child: const Center(child: Text('R', style: TextStyle(fontFamily: 'Poppins', fontSize: 36, fontWeight: FontWeight.w800, color: AppColors.primary))),
                   ),
                 ),
               ],

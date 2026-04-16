@@ -89,9 +89,6 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen>
                         color: AppColors.surfaceVariant,
                         borderRadius:
                             BorderRadius.circular(AppSpacing.radiusMd),
-                        border: const Border.fromBorderSide(
-                          BorderSide(color: AppColors.outlineVariant),
-                        ),
                       ),
                       child: const Icon(
                         Icons.arrow_back_ios_new_rounded,
@@ -275,15 +272,10 @@ class _RoleChip extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.primaryContainer.withValues(alpha: 0.15)
+              ? AppColors.surface
               : AppColors.surfaceVariant,
           borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-          border: Border.all(
-            color: isSelected
-                ? AppColors.primaryContainer
-                : AppColors.outlineVariant,
-            width: isSelected ? 2 : 1,
-          ),
+          boxShadow: isSelected ? AppColors.ambientShadow : null,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

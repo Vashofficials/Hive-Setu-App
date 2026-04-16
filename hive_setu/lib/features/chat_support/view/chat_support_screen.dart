@@ -57,9 +57,9 @@ class _ChatSupportScreenState extends State<ChatSupportScreen> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
-            decoration: const BoxDecoration(
-              color: AppColors.white,
-              border: Border(top: BorderSide(color: AppColors.outlineVariant)),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              boxShadow: AppColors.ambientShadow,
             ),
             child: Row(
               children: [
@@ -131,14 +131,14 @@ class _ChatBubble extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
-                color: message.isBot ? AppColors.white : AppColors.primary,
+                color: message.isBot ? AppColors.surface : AppColors.primary,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(16),
                   topRight: const Radius.circular(16),
                   bottomLeft: Radius.circular(message.isBot ? 4 : 16),
                   bottomRight: Radius.circular(message.isBot ? 16 : 4),
                 ),
-                border: message.isBot ? Border.all(color: AppColors.outlineVariant) : null,
+                boxShadow: message.isBot ? AppColors.ambientShadow : null,
               ),
               child: Column(
                 crossAxisAlignment: message.isBot ? CrossAxisAlignment.start : CrossAxisAlignment.end,

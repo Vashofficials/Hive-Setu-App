@@ -3,7 +3,7 @@ import '../constants/app_colors.dart';
 import '../constants/app_spacing.dart';
 import '../constants/app_text_styles.dart';
 
-enum AppButtonVariant { primary, secondary, outline, ghost, danger }
+enum AppButtonVariant { primary, secondary, nest, ghost, danger }
 
 enum AppButtonSize { large, medium, small }
 
@@ -72,17 +72,11 @@ class AppButton extends StatelessWidget {
     return SizedBox(
       width: width,
       height: _height,
-      child: variant == AppButtonVariant.outline
-          ? OutlinedButton(
-              style: style,
-              onPressed: disabled ? null : onPressed,
-              child: _child,
-            )
-          : ElevatedButton(
-              style: style,
-              onPressed: disabled ? null : onPressed,
-              child: _child,
-            ),
+      child: ElevatedButton(
+        style: style,
+        onPressed: disabled ? null : onPressed,
+        child: _child,
+      ),
     );
   }
 
@@ -99,12 +93,10 @@ class AppButton extends StatelessWidget {
           textStyle: AppTextStyles.buttonText.copyWith(fontSize: _fontSize),
           padding: EdgeInsets.symmetric(horizontal: _paddingH),
         ),
-      AppButtonVariant.outline => OutlinedButton.styleFrom(
+      AppButtonVariant.nest => ElevatedButton.styleFrom(
+          backgroundColor: AppColors.surfaceVariant,
           foregroundColor: AppColors.primary,
-          side: BorderSide(
-            color: disabled ? AppColors.outline : AppColors.primary,
-            width: 1.5,
-          ),
+          elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
           ),
@@ -191,18 +183,20 @@ class _PollenPillButtonState extends State<_PollenPillButton>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _scaleAnimation;
+  late final Animation<double> _glowAnimation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 100),
-      lowerBound: 0.0,
-      upperBound: 0.05,
+      duration: const Duration(milliseconds: 150),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    );
+    _glowAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
   }
 
@@ -226,62 +220,78 @@ class _PollenPillButtonState extends State<_PollenPillButton>
             },
       onTapCancel: disabled ? null : () => _controller.reverse(),
       child: AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) => Transform.scale(
-          scale: _scaleAnimation.value,
-          child: child,
-        ),
-        child: Container(
-          width: widget.width,
-          height: widget.height,
-          padding: EdgeInsets.symmetric(horizontal: widget.paddingH),
-          decoration: BoxDecoration(
-            gradient: disabled ? null : AppColors.pollenPillGradient,
-            color: disabled ? AppColors.onSurface.withValues(alpha: 0.12) : null,
-            borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-            boxShadow: disabled
-                ? null
-                : [
-                    BoxShadow(
-                      color: AppColors.primaryContainer.withValues(alpha: 0.4),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-          ),
-          child: Row(
-            mainAxisSize: widget.width == null ? MainAxisSize.min : MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (widget.isLoading) ...[
-                const SizedBox(
-                  width: 18,
-                  height: 18,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
+        animation: _controller,
+        builder: (context, child) => Stack(
+          alignment: Alignment.center,
+          children: [
+            // Interaction Glow
+            if (!disabled)
+              Transform.scale(
+                scale: 1.0 + (_glowAnimation.value * 0.1),
+                child: Container(
+                  width: (widget.width ?? 200) * 1.1,
+                  height: widget.height * 1.2,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryContainer.withValues(alpha: 0.1 * _glowAnimation.value),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primaryContainer.withValues(alpha: 0.3 * _glowAnimation.value),
+                        blurRadius: 20,
+                        spreadRadius: 2,
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(width: AppSpacing.sm),
-              ] else if (widget.icon != null) ...[
-                widget.icon!,
-                const SizedBox(width: AppSpacing.sm),
-              ],
-              Text(
-                widget.label,
-                style: AppTextStyles.buttonText.copyWith(
-                  fontSize: widget.fontSize,
-                  color: disabled
-                      ? AppColors.onSurface.withValues(alpha: 0.38)
-                      : AppColors.white,
+              ),
+            Transform.scale(
+              scale: _scaleAnimation.value,
+              child: Container(
+                width: widget.width,
+                height: widget.height,
+                padding: EdgeInsets.symmetric(horizontal: widget.paddingH),
+                decoration: BoxDecoration(
+                  gradient: disabled ? null : AppColors.pollenPillGradient,
+                  color: disabled ? AppColors.onSurface.withValues(alpha: 0.12) : null,
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+                  boxShadow: disabled ? null : AppColors.ambientShadow,
+                ),
+                child: Row(
+                  mainAxisSize: widget.width == null ? MainAxisSize.min : MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (widget.isLoading) ...[
+                      const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                    ] else if (widget.icon != null) ...[
+                      widget.icon!,
+                      const SizedBox(width: AppSpacing.sm),
+                    ],
+                    Text(
+                      widget.label,
+                      style: AppTextStyles.buttonText.copyWith(
+                        fontSize: widget.fontSize,
+                        color: disabled
+                            ? AppColors.onSurface.withValues(alpha: 0.38)
+                            : AppColors.white,
+                      ),
+                    ),
+                    if (widget.trailing != null) ...[
+                      const SizedBox(width: AppSpacing.sm),
+                      widget.trailing!,
+                    ],
+                  ],
                 ),
               ),
-              if (widget.trailing != null) ...[
-                const SizedBox(width: AppSpacing.sm),
-                widget.trailing!,
-              ],
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

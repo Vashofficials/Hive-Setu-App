@@ -43,7 +43,7 @@ class ApiaryScreen extends StatelessWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 _SummaryItem(value: '21', label: 'Healthy', icon: '✅'),
                 _SummaryItem(value: '1', label: 'Alert', icon: '⚠️'),
                 _SummaryItem(value: '2', label: 'Queenless', icon: '👑'),
@@ -113,12 +113,11 @@ class _HiveCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-        border: Border.all(
-          color: hive.color.withValues(alpha: 0.4),
-          width: hive.status == 'Alert' ? 2 : 1,
-        ),
+        boxShadow: hive.status == 'Alert' 
+            ? [BoxShadow(color: AppColors.error.withValues(alpha: 0.12), blurRadius: 16, offset: const Offset(0, 8))]
+            : AppColors.ambientShadow,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

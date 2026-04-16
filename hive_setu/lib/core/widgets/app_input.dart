@@ -65,11 +65,31 @@ class AppInput extends StatefulWidget {
 
 class _AppInputState extends State<AppInput> {
   bool _obscureText = false;
+  late final FocusNode _internalFocusNode;
+  bool _isFocused = false;
 
   @override
   void initState() {
     super.initState();
     _obscureText = widget.obscureText;
+    _internalFocusNode = widget.focusNode ?? FocusNode();
+    _internalFocusNode.addListener(_onFocusChange);
+  }
+
+  void _onFocusChange() {
+    setState(() {
+      _isFocused = _internalFocusNode.hasFocus;
+    });
+  }
+
+  @override
+  void dispose() {
+    if (widget.focusNode == null) {
+      _internalFocusNode.dispose();
+    } else {
+      _internalFocusNode.removeListener(_onFocusChange);
+    }
+    super.dispose();
   }
 
   @override
@@ -89,104 +109,102 @@ class _AppInputState extends State<AppInput> {
           ),
           const SizedBox(height: AppSpacing.xs),
         ],
-        TextFormField(
-          controller: widget.controller,
-          initialValue: widget.initialValue,
-          onChanged: widget.onChanged,
-          onFieldSubmitted: widget.onSubmitted,
-          validator: widget.validator,
-          keyboardType: widget.keyboardType,
-          textInputAction: widget.textInputAction,
-          obscureText: _obscureText,
-          enabled: widget.enabled,
-          readOnly: widget.readOnly,
-          maxLines: _obscureText ? 1 : widget.maxLines,
-          minLines: widget.minLines,
-          maxLength: widget.maxLength,
-          focusNode: widget.focusNode,
-          autofocus: widget.autofocus,
-          onTap: widget.onTap,
-          style: AppTextStyles.bodyMedium.copyWith(
-            color: AppColors.onSurface,
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+            boxShadow: _isFocused ? AppColors.ambientShadow : null,
           ),
-          decoration: InputDecoration(
-            hintText: widget.hint,
-            hintStyle: AppTextStyles.inputHint.copyWith(
-              color: AppColors.onSurfaceVariant,
+          child: TextFormField(
+            controller: widget.controller,
+            initialValue: widget.initialValue,
+            onChanged: widget.onChanged,
+            onFieldSubmitted: widget.onSubmitted,
+            validator: widget.validator,
+            keyboardType: widget.keyboardType,
+            textInputAction: widget.textInputAction,
+            obscureText: _obscureText,
+            enabled: widget.enabled,
+            readOnly: widget.readOnly,
+            maxLines: _obscureText ? 1 : widget.maxLines,
+            minLines: widget.minLines,
+            maxLength: widget.maxLength,
+            focusNode: _internalFocusNode,
+            autofocus: widget.autofocus,
+            onTap: widget.onTap,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.onSurface,
             ),
-            errorText: widget.errorText,
-            helperText: widget.helperText,
-            helperStyle: AppTextStyles.caption.copyWith(
-              color: AppColors.onSurfaceVariant,
-            ),
-            filled: true,
-            fillColor: widget.fillColor ??
-                (widget.enabled
-                    ? AppColors.surfaceVariant
-                    : AppColors.onSurface.withValues(alpha: 0.04)),
-            prefix: widget.prefix,
-            prefixIcon: widget.prefixIcon != null
-                ? Padding(
-                    padding: const EdgeInsets.only(left: AppSpacing.md),
-                    child: widget.prefixIcon,
-                  )
-                : null,
-            prefixIconConstraints: const BoxConstraints(
-              minWidth: 44,
-              minHeight: 44,
-            ),
-            suffix: widget.suffix,
-            suffixIcon: widget.obscureText
-                ? GestureDetector(
-                    onTap: () => setState(() => _obscureText = !_obscureText),
-                    child: Icon(
-                      _obscureText
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                      size: AppSpacing.iconSm,
-                      color: AppColors.onSurfaceVariant,
-                    ),
-                  )
-                : widget.suffixIcon,
-            suffixIconConstraints: const BoxConstraints(
-              minWidth: 44,
-              minHeight: 44,
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.lg,
-              vertical: AppSpacing.md,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-              borderSide: BorderSide.none,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-              borderSide: const BorderSide(
-                color: AppColors.outlineVariant,
-                width: 1,
+            decoration: InputDecoration(
+              hintText: widget.hint,
+              hintStyle: AppTextStyles.inputHint.copyWith(
+                color: AppColors.onSurfaceVariant,
               ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-              borderSide: const BorderSide(
-                color: AppColors.primary,
-                width: 2,
+              errorText: widget.errorText,
+              helperText: widget.helperText,
+              helperStyle: AppTextStyles.caption.copyWith(
+                color: AppColors.onSurfaceVariant,
               ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-              borderSide: const BorderSide(color: AppColors.error, width: 1),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-              borderSide: const BorderSide(color: AppColors.error, width: 2),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-              borderSide: const BorderSide(
-                color: AppColors.outlineVariant,
-                width: 1,
+              filled: true,
+              fillColor: widget.fillColor ??
+                  (widget.enabled
+                      ? (AppColors.white)
+                      : AppColors.onSurface.withValues(alpha: 0.04)),
+              prefix: widget.prefix,
+              prefixIcon: widget.prefixIcon != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: AppSpacing.md),
+                      child: widget.prefixIcon,
+                    )
+                  : null,
+              prefixIconConstraints: const BoxConstraints(
+                minWidth: 44,
+                minHeight: 44,
+              ),
+              suffix: widget.suffix,
+              suffixIcon: widget.obscureText
+                  ? GestureDetector(
+                      onTap: () => setState(() => _obscureText = !_obscureText),
+                      child: Icon(
+                        _obscureText
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                        size: AppSpacing.iconSm,
+                        color: AppColors.onSurfaceVariant,
+                      ),
+                    )
+                  : widget.suffixIcon,
+              suffixIconConstraints: const BoxConstraints(
+                minWidth: 44,
+                minHeight: 44,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+                vertical: AppSpacing.md,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppColors.primaryContainer, width: 2),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppColors.error, width: 1.5),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppColors.error, width: 2),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
               ),
             ),
           ),

@@ -35,7 +35,23 @@ class AppTheme {
         outlineVariant: AppColors.outlineVariant,
       ),
       scaffoldBackgroundColor: AppColors.background,
-      textTheme: GoogleFonts.poppinsTextTheme(base.textTheme),
+      textTheme: GoogleFonts.notoSansTextTheme(base.textTheme).copyWith(
+        displayLarge: AppTextStyles.displayLarge,
+        displayMedium: AppTextStyles.displayMedium,
+        displaySmall: AppTextStyles.displaySmall,
+        headlineLarge: AppTextStyles.headlineLarge,
+        headlineMedium: AppTextStyles.headlineMedium,
+        headlineSmall: AppTextStyles.headlineSmall,
+        titleLarge: AppTextStyles.titleLarge,
+        titleMedium: AppTextStyles.titleMedium,
+        titleSmall: AppTextStyles.titleSmall,
+        bodyLarge: AppTextStyles.bodyLarge,
+        bodyMedium: AppTextStyles.bodyMedium,
+        bodySmall: AppTextStyles.bodySmall,
+        labelLarge: AppTextStyles.labelLarge,
+        labelMedium: AppTextStyles.labelMedium,
+        labelSmall: AppTextStyles.labelSmall,
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.surface,
         foregroundColor: AppColors.onSurface,
@@ -47,11 +63,7 @@ class AppTheme {
           statusBarIconBrightness: Brightness.dark,
           statusBarBrightness: Brightness.light,
         ),
-        titleTextStyle: GoogleFonts.poppins(
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-          color: AppColors.onSurface,
-        ),
+        titleTextStyle: AppTextStyles.appBarTitle,
         iconTheme: const IconThemeData(
           color: AppColors.onSurface,
           size: AppSpacing.iconMd,
@@ -62,7 +74,6 @@ class AppTheme {
         color: AppColors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-          side: const BorderSide(color: AppColors.outlineVariant, width: 1),
         ),
         margin: EdgeInsets.zero,
       ),
@@ -75,11 +86,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
           ),
           elevation: 0,
-          textStyle: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.5,
-          ),
+          textStyle: AppTextStyles.buttonText,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -89,91 +96,93 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
           ),
-          side: const BorderSide(color: AppColors.primary, width: 1.5),
-          textStyle: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.5,
-          ),
+          side: BorderSide.none,
+          textStyle: AppTextStyles.buttonText,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          textStyle: GoogleFonts.poppins(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: AppTextStyles.buttonSmall,
         ),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: AppColors.black,
+        indicatorColor: AppColors.primaryContainer.withValues(alpha: 0.1),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppTextStyles.navLabel.copyWith(color: AppColors.primaryContainer);
+          }
+          return AppTextStyles.navLabel.copyWith(color: AppColors.white.withValues(alpha: 0.7));
+        }),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppColors.primaryContainer);
+          }
+          return IconThemeData(color: AppColors.white.withValues(alpha: 0.7));
+        }),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColors.black,
+        selectedItemColor: AppColors.primaryContainer,
+        unselectedItemColor: AppColors.white.withValues(alpha: 0.7),
+        selectedLabelStyle: AppTextStyles.navLabel,
+        unselectedLabelStyle: AppTextStyles.navLabel,
+        type: BottomNavigationBarType.fixed,
+        elevation: 8,
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surfaceVariant,
+        fillColor: AppColors.white,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.md,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-          borderSide: const BorderSide(color: AppColors.outlineVariant, width: 1),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.primaryContainer, width: 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+          borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.error, width: 1),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+          borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.error, width: 2),
         ),
-        hintStyle: GoogleFonts.poppins(
-          fontSize: 14,
-          color: AppColors.onSurfaceVariant,
-        ),
-        labelStyle: GoogleFonts.poppins(
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-          color: AppColors.onSurfaceVariant,
-        ),
-        floatingLabelStyle: GoogleFonts.poppins(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-          color: AppColors.primary,
-        ),
+        hintStyle: AppTextStyles.inputHint,
+        labelStyle: AppTextStyles.inputLabel,
+        floatingLabelStyle: AppTextStyles.inputLabel.copyWith(color: AppColors.primary),
       ),
       chipTheme: ChipThemeData(
-        backgroundColor: AppColors.surfaceVariant,
+        backgroundColor: AppColors.surfaceVariant.withValues(alpha: 0.5),
         selectedColor: AppColors.primaryContainer,
-        labelStyle: GoogleFonts.poppins(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-        ),
+        labelStyle: AppTextStyles.chipLabel,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
         ),
+        side: BorderSide.none,
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
           vertical: AppSpacing.xs,
         ),
       ),
       dividerTheme: const DividerThemeData(
-        color: AppColors.divider,
-        thickness: 1,
-        space: 1,
+        color: AppColors.transparent,
+        thickness: 0,
+        space: 0,
       ),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: AppColors.onSurface,
-        contentTextStyle: GoogleFonts.poppins(
-          fontSize: 13,
-          color: AppColors.surface,
-        ),
+        contentTextStyle: AppTextStyles.bodySmall.copyWith(color: AppColors.surface),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         ),
@@ -182,6 +191,7 @@ class AppTheme {
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: AppColors.surface,
         modalBackgroundColor: AppColors.surface,
+        showDragHandle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(AppSpacing.radiusXxl),

@@ -68,9 +68,9 @@ class _ProductCard extends StatelessWidget {
       onTap: () => context.push(AppRoutes.productDetail),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-          border: Border.all(color: AppColors.outlineVariant),
+          boxShadow: AppColors.ambientShadow,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

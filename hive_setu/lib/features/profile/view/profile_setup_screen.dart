@@ -107,12 +107,9 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                         width: 90,
                         height: 90,
                         decoration: BoxDecoration(
-                          color: AppColors.surfaceVariant,
+                          color: AppColors.surface,
                           shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.outlineVariant,
-                            width: 2,
-                          ),
+                          boxShadow: AppColors.ambientShadow,
                         ),
                         child: const Icon(
                           Icons.person_rounded,
@@ -186,32 +183,22 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                           v == null ? 'Please select a state' : null,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: AppColors.surfaceVariant,
+                        fillColor: AppColors.surface,
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: AppSpacing.lg,
                           vertical: AppSpacing.md,
                         ),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppSpacing.radiusMd),
-                          borderSide: const BorderSide(
-                            color: AppColors.outlineVariant,
-                          ),
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                          borderSide: BorderSide.none,
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppSpacing.radiusMd),
-                          borderSide: const BorderSide(
-                            color: AppColors.outlineVariant,
-                          ),
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                          borderSide: BorderSide.none,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppSpacing.radiusMd),
-                          borderSide: const BorderSide(
-                            color: AppColors.primary,
-                            width: 2,
-                          ),
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                          borderSide: BorderSide.none,
                         ),
                       ),
                     ),

@@ -29,9 +29,9 @@ class LocationScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: AppColors.surface,
                 borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 16, offset: const Offset(0, 4))],
+                boxShadow: AppColors.ambientShadow,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

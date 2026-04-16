@@ -79,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               decoration: BoxDecoration(
                 color: AppColors.error.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-                border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
+                boxShadow: [BoxShadow(color: AppColors.error.withValues(alpha: 0.05), blurRadius: 8, spreadRadius: 0)],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -119,7 +119,11 @@ class _SettingTile extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.only(bottom: AppSpacing.sm),
           padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(AppSpacing.cardRadius), border: Border.all(color: AppColors.outlineVariant)),
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+            boxShadow: AppColors.ambientShadow,
+          ),
           child: Row(
             children: [
               Container(width: 36, height: 36, decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
@@ -145,7 +149,11 @@ class _SwitchTile extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         margin: const EdgeInsets.only(bottom: AppSpacing.sm),
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
-        decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(AppSpacing.cardRadius), border: Border.all(color: AppColors.outlineVariant)),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+          boxShadow: AppColors.ambientShadow,
+        ),
         child: Row(
           children: [
             Container(width: 36, height: 36, decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),

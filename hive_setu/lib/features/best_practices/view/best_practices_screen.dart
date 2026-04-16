@@ -57,7 +57,6 @@ class _BestPracticesScreenState extends State<BestPracticesScreen> {
                     decoration: BoxDecoration(
                       color: isActive ? AppColors.primary : AppColors.surfaceVariant,
                       borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
-                      border: Border.all(color: isActive ? AppColors.primary : AppColors.outlineVariant),
                     ),
                     child: Text(
                       cat[0].toUpperCase() + cat.substring(1),
@@ -100,10 +99,9 @@ class _TipCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-        border: Border.all(color: AppColors.outlineVariant),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: AppColors.ambientShadow,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

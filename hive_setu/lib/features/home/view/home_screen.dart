@@ -130,28 +130,23 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: AppSpacing.screenPaddingH,
             vertical: AppSpacing.sm,
           ),
-          child: Row(
+        child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Expanded(
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'नमस्ते, Ramesh 🙏',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
+                      style: AppTextStyles.headlineSmall.copyWith(
                         color: AppColors.onSurface,
                       ),
                     ),
                     Text(
                       'Muzaffarnagar, Uttar Pradesh',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 12,
+                      style: AppTextStyles.bodySmall.copyWith(
                         color: AppColors.onSurfaceVariant,
                       ),
                     ),
@@ -168,9 +163,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: AppColors.surfaceVariant,
                       borderRadius: BorderRadius.circular(
                           AppSpacing.radiusMd),
-                      border: Border.all(
-                        color: AppColors.outlineVariant,
-                      ),
                     ),
                     child: const Icon(
                       Icons.notifications_outlined,
@@ -217,9 +209,6 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         color: AppColors.amberAlert.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-        border: Border.all(
-          color: AppColors.amberAlert.withValues(alpha: 0.4),
-        ),
       ),
       child: Row(
         children: [
@@ -230,29 +219,25 @@ class _HomeScreenState extends State<HomeScreen> {
               color: AppColors.amberAlert.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
             ),
-            child: const Center(
-              child: Text('⚠️', style: TextStyle(fontSize: 18)),
+            child: Center(
+              child: const Text('⚠️', style: TextStyle(fontSize: 18)),
             ),
           ),
           const SizedBox(width: AppSpacing.md),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Varroa Alert — Check Hive 3',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
+                  style: AppTextStyles.titleSmall.copyWith(
                     color: AppColors.onSurface,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
                   'Mite infestation detected. Inspect today.',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 11,
+                  style: AppTextStyles.bodySmall.copyWith(
                     color: AppColors.onSurfaceVariant,
                   ),
                 ),
@@ -362,9 +347,9 @@ class _StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
-        border: Border.all(color: AppColors.outlineVariant),
+        boxShadow: AppColors.ambientShadow,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -423,9 +408,9 @@ class _QuickAction extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-          border: Border.all(color: AppColors.outlineVariant),
+          boxShadow: AppColors.ambientShadow,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -471,9 +456,9 @@ class _ActivityTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-        border: Border.all(color: AppColors.outlineVariant),
+        boxShadow: AppColors.ambientShadow,
       ),
       child: Row(
         children: [
@@ -511,11 +496,6 @@ class _ActivityTile extends StatelessWidget {
                   ? AppColors.secondary.withValues(alpha: 0.15)
                   : AppColors.surfaceVariant,
               shape: BoxShape.circle,
-              border: Border.all(
-                color: activity.done
-                    ? AppColors.secondary
-                    : AppColors.outlineVariant,
-              ),
             ),
             child: activity.done
                 ? const Icon(
@@ -549,9 +529,9 @@ class _PriceTile extends StatelessWidget {
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-        border: Border.all(color: AppColors.outlineVariant),
+        boxShadow: AppColors.ambientShadow,
       ),
       child: Row(
         children: [
