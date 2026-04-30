@@ -8,7 +8,8 @@ import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_input.dart';
 
 class ProfileSetupScreen extends StatefulWidget {
-  const ProfileSetupScreen({super.key});
+  const ProfileSetupScreen({super.key, this.role = 'beekeeper'});
+  final String role;
 
   @override
   State<ProfileSetupScreen> createState() => _ProfileSetupScreenState();
@@ -45,6 +46,22 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
     await Future.delayed(const Duration(milliseconds: 1000));
     if (mounted) {
       setState(() => _isLoading = false);
+      _navigateToDashboard();
+    }
+  }
+
+  void _navigateToDashboard() {
+    if (widget.role == 'beekeeper') {
+      context.go(AppRoutes.home);
+    } else if (widget.role == 'collector') {
+      context.go(AppRoutes.harvestLog);
+    } else if (widget.role == 'buyer') {
+      context.go(AppRoutes.marketplace);
+    } else if (widget.role == 'fpo') {
+      context.go(AppRoutes.fpoDashboard);
+    } else if (widget.role == 'field_officer') {
+      context.go(AppRoutes.alertFeed);
+    } else {
       context.go(AppRoutes.home);
     }
   }
@@ -242,7 +259,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
                 Center(
                   child: TextButton(
-                    onPressed: () => context.go(AppRoutes.home),
+                    onPressed: _navigateToDashboard,
                     child: Text(
                       'Skip for now',
                       style: AppTextStyles.labelLarge.copyWith(

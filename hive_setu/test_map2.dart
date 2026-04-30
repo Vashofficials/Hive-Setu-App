@@ -1,0 +1,1 @@
+void main() { final map = <String, String>{'a': 'b'}; try { final c = map as Map<String, dynamic>?; print('success'); } catch(e) { print(e); } }

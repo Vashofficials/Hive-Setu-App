@@ -56,7 +56,15 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen>
     await Future.delayed(const Duration(milliseconds: 1200));
     if (mounted) {
       setState(() => _isLoading = false);
-      context.go(AppRoutes.otp, extra: _phoneController.text.trim());
+      context.go(
+        Uri(
+          path: AppRoutes.otp,
+          queryParameters: {
+            'phone': _phoneController.text.trim(),
+            'role': _selectedRole,
+          },
+        ).toString(),
+      );
     }
   }
 

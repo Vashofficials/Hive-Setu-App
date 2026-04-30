@@ -109,14 +109,18 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.otp,
       name: 'otp',
       builder: (context, state) {
-        final phone = state.extra as String? ?? '';
-        return OtpScreen(phone: phone);
+        final phone = state.uri.queryParameters['phone'] ?? '';
+        final role = state.uri.queryParameters['role'] ?? 'beekeeper';
+        return OtpScreen(phone: phone, role: role);
       },
     ),
     GoRoute(
       path: AppRoutes.profileSetup,
       name: 'profileSetup',
-      builder: (context, state) => const ProfileSetupScreen(),
+      builder: (context, state) {
+        final role = state.uri.queryParameters['role'] ?? 'beekeeper';
+        return ProfileSetupScreen(role: role);
+      },
     ),
 
     // Beekeeper Core

@@ -7,8 +7,9 @@ import '../../../core/router/app_router.dart';
 import '../../../core/widgets/app_button.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key, required this.phone});
+  const OtpScreen({super.key, required this.phone, this.role = 'beekeeper'});
   final String phone;
+  final String role;
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -64,7 +65,12 @@ class _OtpScreenState extends State<OtpScreen>
     await Future.delayed(const Duration(milliseconds: 1200));
     if (mounted) {
       setState(() => _isLoading = false);
-      context.go(AppRoutes.profileSetup);
+      context.go(
+        Uri(
+          path: AppRoutes.profileSetup,
+          queryParameters: {'role': widget.role},
+        ).toString(),
+      );
     }
   }
 
