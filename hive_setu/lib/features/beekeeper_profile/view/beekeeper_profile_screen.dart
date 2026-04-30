@@ -74,7 +74,7 @@ class BeekeeperProfileScreen extends StatelessWidget {
                     style: AppTextStyles.bodyMedium.copyWith(color: AppColors.onSurfaceVariant),
                   ),
                   const SizedBox(height: AppSpacing.xl),
-                  AppButton(label: 'Edit Profile', onPressed: () {}, variant: AppButtonVariant.outline, width: double.infinity),
+                  AppButton(label: 'Edit Profile', onPressed: () {}, variant: AppButtonVariant.nest, width: double.infinity),
                   const SizedBox(height: AppSpacing.xxl),
                 ],
               ),

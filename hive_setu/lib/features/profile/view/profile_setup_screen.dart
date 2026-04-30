@@ -4,6 +4,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/utils/role_store.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_input.dart';
 
@@ -39,13 +40,21 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
     super.dispose();
   }
 
+  String get _homeRoute => switch (RoleStore.current) {
+        'buyer' => AppRoutes.buyerHome,
+        'fpo' => AppRoutes.fpoDashboard,
+        'field_officer' => AppRoutes.fieldOfficerHome,
+        'collector' => AppRoutes.harvestLog,
+        _ => AppRoutes.home,
+      };
+
   Future<void> _saveProfile() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _isLoading = true);
     await Future.delayed(const Duration(milliseconds: 1000));
     if (mounted) {
       setState(() => _isLoading = false);
-      context.go(AppRoutes.home);
+      context.go(_homeRoute);
     }
   }
 
@@ -242,7 +251,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
                 Center(
                   child: TextButton(
-                    onPressed: () => context.go(AppRoutes.home),
+                    onPressed: () => context.go(_homeRoute),
                     child: Text(
                       'Skip for now',
                       style: AppTextStyles.labelLarge.copyWith(

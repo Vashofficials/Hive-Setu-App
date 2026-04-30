@@ -70,7 +70,7 @@ class _RequestCard extends StatelessWidget {
               Expanded(
                 child: AppButton(
                   label: 'Reject',
-                  variant: AppButtonVariant.outline,
+                  variant: AppButtonVariant.ghost,
                   onPressed: () {},
                 ),
               ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
+import '../../../core/router/app_router.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_header.dart';
 
@@ -64,8 +66,10 @@ class ApiaryScreen extends StatelessWidget {
                 childAspectRatio: 1.1,
               ),
               itemCount: _hives.length,
-              itemBuilder: (context, index) =>
-                  _HiveCard(hive: _hives[index]),
+              itemBuilder: (context, index) => _HiveCard(
+                hive: _hives[index],
+                onTap: () => context.push(AppRoutes.hiveDetail, extra: _hives[index].id),
+              ),
             ),
           ),
         ],
@@ -105,12 +109,15 @@ class _Hive {
 }
 
 class _HiveCard extends StatelessWidget {
-  const _HiveCard({required this.hive});
+  const _HiveCard({required this.hive, required this.onTap});
   final _Hive hive;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: AppColors.surface,
@@ -146,6 +153,7 @@ class _HiveCard extends StatelessWidget {
           Text('Queen: ${hive.queen}', style: AppTextStyles.caption.copyWith(color: AppColors.onSurfaceVariant)),
         ],
       ),
+    ),
     );
   }
 }

@@ -5,6 +5,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/utils/role_store.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_input.dart';
 
@@ -52,6 +53,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen>
 
   Future<void> _sendOtp() async {
     if (!_formKey.currentState!.validate()) return;
+    RoleStore.set(_selectedRole);
     setState(() => _isLoading = true);
     await Future.delayed(const Duration(milliseconds: 1200));
     if (mounted) {

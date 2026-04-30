@@ -75,7 +75,7 @@ class DigitalIdScreen extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             AppButton(
               label: '📤  Share',
-              variant: AppButtonVariant.outline,
+              variant: AppButtonVariant.nest,
               onPressed: () {},
               width: double.infinity,
             ),
