@@ -35,6 +35,26 @@ import '../../features/fpo_admin/view/fpo_approval_screen.dart';
 import '../../features/fpo_admin/view/fpo_broadcast_screen.dart';
 import '../../features/field_officer/view/field_officer_alerts_screen.dart';
 import '../../features/field_officer/view/field_officer_map_screen.dart';
+import '../../features/buyer/view/buyer_dashboard_screen.dart';
+import '../../features/buyer/view/product_categories_screen.dart';
+import '../../features/buyer/view/cart_screen.dart';
+import '../../features/buyer/view/shipping_details_screen.dart';
+import '../../features/buyer/view/payment_screen.dart';
+import '../../features/buyer/view/order_confirmation_screen.dart';
+import '../../features/buyer/view/orders_list_screen.dart';
+import '../../features/buyer/view/bulk_enquiry_screen.dart';
+import '../../features/buyer/view/supplier_profile_screen.dart';
+import '../../features/fpo_admin/view/member_detail_screen.dart';
+import '../../features/fpo_admin/view/stock_listings_screen.dart';
+import '../../features/fpo_admin/view/reports_center_screen.dart';
+import '../../features/field_officer/view/officer_dashboard_screen.dart';
+import '../../features/field_officer/view/scheme_beneficiary_list_screen.dart';
+import '../../features/field_officer/view/beneficiary_detail_screen.dart';
+import '../../features/field_officer/view/incident_map_screen.dart';
+import '../../features/field_officer/view/incident_detail_screen.dart';
+import '../../features/field_officer/view/field_visit_planner_screen.dart';
+import '../../features/field_officer/view/field_visit_log_screen.dart';
+import '../../features/field_officer/view/officer_reports_screen.dart';
 
 class AppRoutes {
   // Onboarding
@@ -73,16 +93,36 @@ class AppRoutes {
   static const marketplace = '/marketplace';
   static const productDetail = '/product-detail';
   static const checkout = '/checkout';
+  static const buyerDashboard = '/buyer-dashboard';
+  static const productCategories = '/product-categories';
+  static const cart = '/cart';
+  static const shippingDetails = '/shipping-details';
+  static const payment = '/payment';
+  static const orderConfirmation = '/order-confirmation';
+  static const ordersList = '/orders-list';
+  static const bulkEnquiry = '/bulk-enquiry';
+  static const supplierProfile = '/supplier-profile';
 
   // FPO Admin
   static const fpoDashboard = '/fpo-dashboard';
   static const fpoMembers = '/fpo-members';
   static const fpoApproval = '/fpo-approval';
   static const fpoBroadcast = '/fpo-broadcast';
+  static const memberDetail = '/member-detail';
+  static const stockListings = '/stock-listings';
+  static const reportsCenter = '/reports-center';
 
   // Field Officer
   static const alertFeed = '/alert-feed';
   static const districtMap = '/district-map';
+  static const officerDashboard = '/officer-dashboard';
+  static const schemeBeneficiaryList = '/scheme-beneficiaries';
+  static const beneficiaryDetail = '/beneficiary-detail';
+  static const incidentMap = '/incident-map';
+  static const incidentDetail = '/incident-detail';
+  static const fieldVisitPlanner = '/field-visit-planner';
+  static const fieldVisitLog = '/field-visit-log';
+  static const officerReports = '/officer-reports';
 }
 
 final GoRouter appRouter = GoRouter(
@@ -248,6 +288,51 @@ final GoRouter appRouter = GoRouter(
       name: 'checkout',
       builder: (context, state) => const CheckoutScreen(),
     ),
+    GoRoute(
+      path: AppRoutes.buyerDashboard,
+      name: 'buyerDashboard',
+      builder: (context, state) => const BuyerDashboardScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.productCategories,
+      name: 'productCategories',
+      builder: (context, state) => const ProductCategoriesScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.cart,
+      name: 'cart',
+      builder: (context, state) => const CartScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.shippingDetails,
+      name: 'shippingDetails',
+      builder: (context, state) => const ShippingDetailsScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.payment,
+      name: 'payment',
+      builder: (context, state) => const PaymentScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.orderConfirmation,
+      name: 'orderConfirmation',
+      builder: (context, state) => const OrderConfirmationScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.ordersList,
+      name: 'ordersList',
+      builder: (context, state) => const OrdersListScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.bulkEnquiry,
+      name: 'bulkEnquiry',
+      builder: (context, state) => const BulkEnquiryScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.supplierProfile,
+      name: 'supplierProfile',
+      builder: (context, state) => const SupplierProfileScreen(),
+    ),
 
     // FPO Admin
     GoRoute(
@@ -270,6 +355,21 @@ final GoRouter appRouter = GoRouter(
       name: 'fpoBroadcast',
       builder: (context, state) => const FpoBroadcastScreen(),
     ),
+    GoRoute(
+      path: AppRoutes.memberDetail,
+      name: 'memberDetail',
+      builder: (context, state) => const MemberDetailScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.stockListings,
+      name: 'stockListings',
+      builder: (context, state) => const StockListingsScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.reportsCenter,
+      name: 'reportsCenter',
+      builder: (context, state) => const ReportsCenterScreen(),
+    ),
 
     // Field Officer
     GoRoute(
@@ -281,6 +381,46 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.districtMap,
       name: 'districtMap',
       builder: (context, state) => const FieldOfficerMapScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.officerDashboard,
+      name: 'officerDashboard',
+      builder: (context, state) => const OfficerDashboardScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.schemeBeneficiaryList,
+      name: 'schemeBeneficiaryList',
+      builder: (context, state) => const SchemeBeneficiaryListScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.beneficiaryDetail,
+      name: 'beneficiaryDetail',
+      builder: (context, state) => const BeneficiaryDetailScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.incidentMap,
+      name: 'incidentMap',
+      builder: (context, state) => const IncidentMapScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.incidentDetail,
+      name: 'incidentDetail',
+      builder: (context, state) => const IncidentDetailScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.fieldVisitPlanner,
+      name: 'fieldVisitPlanner',
+      builder: (context, state) => const FieldVisitPlannerScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.fieldVisitLog,
+      name: 'fieldVisitLog',
+      builder: (context, state) => const FieldVisitLogScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.officerReports,
+      name: 'officerReports',
+      builder: (context, state) => const OfficerReportsScreen(),
     ),
   ],
   errorBuilder: (context, state) => Scaffold(

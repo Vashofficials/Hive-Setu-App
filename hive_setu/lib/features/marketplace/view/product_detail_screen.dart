@@ -69,10 +69,15 @@ class ProductDetailScreen extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: AppButton(
-                          label: 'Add to Cart',
+                        child: OutlinedButton(
                           onPressed: () {},
-                          variant: AppButtonVariant.outline,
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.buyerBlue,
+                            side: BorderSide(color: AppColors.buyerBlue.withValues(alpha: 0.3)),
+                            padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.radiusMd)),
+                          ),
+                          child: Text('Add to Cart', style: AppTextStyles.buttonSmall.copyWith(color: AppColors.buyerBlue)),
                         ),
                       ),
                       const SizedBox(width: AppSpacing.md),

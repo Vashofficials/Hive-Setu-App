@@ -73,11 +73,18 @@ class DigitalIdScreen extends StatelessWidget {
               width: double.infinity,
             ),
             const SizedBox(height: AppSpacing.md),
-            AppButton(
-              label: '📤  Share',
-              variant: AppButtonVariant.outline,
-              onPressed: () {},
+            SizedBox(
               width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.primary,
+                  side: BorderSide(color: AppColors.primary.withValues(alpha: 0.3)),
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.radiusMd)),
+                ),
+                child: Text('📤  Share', style: AppTextStyles.buttonSmall.copyWith(color: AppColors.primary)),
+              ),
             ),
           ],
         ),
